@@ -1,9 +1,18 @@
+import { ProductsList } from "../components/ProductsList"
+import { Carousel } from "../ui/Carousel"
 
 
 
 
 export const ProductsPage = () => {
   return (
-    <div>Products Pageee</div>
+
+    // Ya esta dentro de un container
+    <>
+        <Carousel />
+        <ProductsList />
+    
+    </>
+
   )
 }
