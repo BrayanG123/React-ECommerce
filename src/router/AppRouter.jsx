@@ -5,6 +5,7 @@ import { HomePage } from "../views/pages/HomePage"
 
 import { Navigate, Route, Routes } from "react-router-dom"
 import { ProductsPage } from "../views/pages/ProductsPage";
+import { LoginPage } from "../views/pages/auth/LoginPage";
 // import { LoginPage } from "../auth";
 // import { CalendarPage } from "../calendar";
 // import { useAuthStore } from "../hooks";
@@ -25,7 +26,10 @@ export const AppRouter = () => {
           
             <>
               <Route path="/products" element={ <ProductsPage /> }/>
-              <Route path="/" element={ <HomePage /> }/>
+              {/* <Route path="/" element={ <HomePage /> }/> */}
+                       
+              <Route path="/" element={ <LoginPage /> }/> {/* Borrar luego esto */}
+
               <Route path="/*" element={ <Navigate to="/" /> }/>
             </>
                               

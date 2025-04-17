@@ -72,7 +72,7 @@ import { ProductItem } from "./ProductItem"
 export const ProductsList = () => {
 
     const { products } = useSelector( state => state.products )
-    console.log(products);
+    // console.log(products);
     // const heroes = useMemo( () => getHeroesByPublisher(publisher), [publisher] )
 
     // const heroes = getHeroesByPublisher(publisher); //no descomentar esta

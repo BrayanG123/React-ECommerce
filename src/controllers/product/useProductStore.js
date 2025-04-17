@@ -5,10 +5,6 @@ import ecommerceApi from "../api/ecommerceApi";
 
 
 
-
-
-
-
 export const useProductStore = () => {
 
     const dispatch = useDispatch();
