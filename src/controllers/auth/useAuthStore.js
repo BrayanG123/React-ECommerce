@@ -8,18 +8,20 @@ import ecommerceApi from "../../api/ecommerceApi";
 
 export const useAuthStore = () => {
 
-    const { status, user, erroMessage } = useSelector( state => state.auth );
+    const { status, user, errorMessage } = useSelector( state => state.auth );
     const dispatch = useDispatch();
 
     
     const startLogin = async( { email, password } ) => {
 
-        dispatch( onChecking );
+        dispatch( onChecking() );
 
         try {
-            const { data } = await ecommerceApi.post('/auth/', {email, password}  );
-            localStorage.setItem('token', data.token);
-            dispatch( onLogin( {name: data.name, id: data.id} ) ); //revisar que nos retornara el backend
+            const { data } = await ecommerceApi.get(`/v1/users?email=${email}&password=${password}`, {}  );
+            console.log(data[0]);
+            // localStorage.setItem('token', data.token);
+            // dispatch( onLogin( {name: data[0].name, id: data[0].id} ) ); //revisar que nos retornara el backend
+            dispatch( onLogin( data[0] ) ); //revisar que nos retornara el backend
         } catch (error) {
             dispatch( onLogout('Credenciales Incorrectas') );
             setTimeout( () => {
@@ -28,10 +30,31 @@ export const useAuthStore = () => {
         }
 
     }
+
+    const startRegister = async( { name, email, password } ) => { //Crear Usuario
+
+        dispatch( onChecking() );
+
+        try {
+            const { data } = await ecommerceApi.post('/v1/users', { name, email, password }); 
+            console.log(data);
+            localStorage.setItem('token', data.token);
+            dispatch( onLogin( { name: data.name, id: data.id} ) );
+        } catch (error) {
+            
+        }
+
+    }
     
     return {
+        //Propeidades
+        status,
+        user,
+        errorMessage,
 
-
+        //Metodos
+        startLogin,
+        startRegister,
     }
 
 }

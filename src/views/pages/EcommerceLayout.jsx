@@ -24,7 +24,8 @@ export const EcommerceLayout = ({ children }) => {
 
             </div>
 
-            <Footer />
+            {/* el footer mostrarlo solo si no es admin */}
+            <Footer /> 
 
         </div>
     

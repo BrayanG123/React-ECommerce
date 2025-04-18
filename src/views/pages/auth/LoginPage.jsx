@@ -1,35 +1,58 @@
-
-
+import Swal from 'sweetalert2'
+import { useAuthStore } from '../../../controllers'
+import { useForm } from '../../../helpers/useForm'
 import './LoginPage.css'
+import { useEffect } from 'react'
 
 
+
+
+
+
+const loginFormFields = {
+    loginEmail: '',
+    loginPassword: ''
+}
+
+const registerFormFields = {
+    registerName: '',
+    registerEmail: '',
+    registerPassword: '',
+    registerPassword2: '',
+}
+
+/// =====================   principaalll ===================///////////
 
 export const LoginPage = () => {
+
+    const { startLogin, startRegister, errorMessage } = useAuthStore();
+
+    const { loginEmail, loginPassword, onInputChange: onLoginInputChange } = useForm( loginFormFields );
+    const { registerName, registerEmail, registerPassword, registerPassword2, onInputChange: onRegisterInputChange } = useForm( registerFormFields )
     
-    const loginEmail = '';
-    const loginPassword = '';
+    
 
-    const registerName = '';
-    const registerEmail = '';
-    const registerPassword = '';
-    const registerPassword2 = '';
-
-    const loginSubmit = (  ) => {
-
+    const loginSubmit = ( event ) => {
+        event.preventDefault();
+        // console.log({ loginEmail, loginPassword });
+        startLogin({ email: loginEmail, password: loginPassword });
     }
 
-    const onLoginInputChange = () => {
 
+    const registerSubmit = ( event) => {
+        event.preventDefault();
+        if ( registerPassword !== registerPassword2 ){
+            Swal.fire('Error en registro', 'Las contraseñas no coinciden', 'error');
+            return;
+        }
+        startRegister( {name:registerName, email:registerEmail, password: registerPassword} );
     }
 
-    const onRegisterInputChange = () => {
-
-    }
-
-    const registerSubmit = () => {
-
-    }
-
+    useEffect( () => {
+        if ( errorMessage !== undefined ){
+            Swal.fire('Error en la autenticacion', errorMessage, 'error');
+        }
+    }, [errorMessage]);
 
   return (
     

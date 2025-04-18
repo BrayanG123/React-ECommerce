@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onLoadProducts, onSetActiveProduct } from "../store";
-import ecommerceApi from "../api/ecommerceApi";
+import { onAddNewProduct, onLoadProducts, onSetActiveProduct } from "../../store";
+import ecommerceApi from "../../api/ecommerceApi";
+import Swal from "sweetalert2";
 
 
 
@@ -11,11 +12,12 @@ export const useProductStore = () => {
 
     const { products, activeProduct } = useSelector( state => state.products );
 
-    const setActiveProduct = ( productsProduct ) => {
-        dispatch( onSetActiveProduct( productsProduct ) );
+    const setActiveProduct = ( productsElement ) => {
+        dispatch( onSetActiveProduct( productsElement ) );
     }
 
-    const startLoadingProducts = async() => {
+    // Get productos
+    const startLoadingProducts = async() => { 
 
         try {
             const { data } = await ecommerceApi.get('/v1/products');
@@ -28,6 +30,19 @@ export const useProductStore = () => {
 
     }
 
+    //Put Productos
+    const startCreateProduct = async( productsElement ) => {
+
+        try {
+            const { data } = await ecommerceApi.post( '/v1/products', productsElement ); //no tiene id porq es un prod nuevo
+            console.log(data);
+            dispatch( onAddNewProduct({ ...productsElement, id: data.id }) ); //aqui ponemos el id, asignado por el backend, al store
+        } catch (error) {
+            console.log(error);
+            Swal.fire('Error al guardar', error, 'error');
+        }
+    }
+
     return {
         //Propiedades
         products,
@@ -35,6 +50,7 @@ export const useProductStore = () => {
 
         //Metodos
         startLoadingProducts,
+        startCreateProduct
     }
 
 

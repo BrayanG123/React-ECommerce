@@ -1,19 +1,17 @@
-import { Carousel } from "../ui/Carousel"
-import { Footer } from "../ui/Footer"
-import { Navbar } from "../ui/Navbar"
 import { SecondNavbar } from "../ui/SecondNavbar"
 import { EcommerceLayout } from "./EcommerceLayout"
+import { ProductManagement } from "./ProductManagement/ProductManagement"
+import { PutAndDeletePage } from "./ProductManagement/PutAndDeletePage"
 import { ProductsPage } from "./ProductsPage"
-
 
 
 
 export const HomePage = () => {
 
 
-  
 
-  return (
+
+  return (  
 
     <>
 
@@ -26,7 +24,10 @@ export const HomePage = () => {
 
       <EcommerceLayout>
   
-        <ProductsPage />
+        
+        {/* <ProductsPage /> */}
+        {/* <ProductManagement /> */}
+        <PutAndDeletePage />
 
       </EcommerceLayout>
     </>

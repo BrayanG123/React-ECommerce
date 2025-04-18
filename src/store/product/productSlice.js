@@ -22,11 +22,6 @@ export const productSlice = createSlice({
             state.activeProduct = payload;
         },
 
-        onAddNewProduct: (state, {payload} ) => {
-            state.products.push( payload );
-            state.activeProduct = null;
-        },
-
         onLoadProducts: ( state, { payload = [] }) => {
             state.isLoadingProducts = false;
             payload.forEach( product => {
@@ -35,7 +30,15 @@ export const productSlice = createSlice({
                     state.products.push( product );
                 }
             } )
-        }
+        },
+
+        onAddNewProduct: (state, {payload} ) => {
+            state.products.push( payload );
+            state.activeProduct = null;
+        },
+
+        
+
     }
 
 });

@@ -8,7 +8,7 @@ export const Footer = () => {
 
 
     <>
-        <div className="container-fluid">
+        <div className="container-fluid mt-auto">
 
             <div className="row p-5 bg-dark text-white">
 

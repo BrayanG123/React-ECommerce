@@ -9,6 +9,7 @@ import { useProductStore } from "../../controllers"
 export const ProductsPage = () => {
 
   const { products, startLoadingProducts } = useProductStore();
+  
 
   useEffect(() => {
     startLoadingProducts();
